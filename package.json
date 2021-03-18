@@ -11,8 +11,8 @@
     "server:run": "nodemon --watch build --exec \"node build/server.js \" ",
     "server": "npm-run-all server:dev server:build",
     "client": "npm run client:dev",
-    "star": "npm-run-all --parallel server:build server:dev",
-    "start": "npm-run-all --parallel server:dev server:run"
+    "dev": "npm-run-all --parallel client:dev",
+    "start": "npm-run-all --parallel dev server:dev server:run"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
@@ -40,7 +40,6 @@
     "webpack-node-externals": "^2.5.2"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.0",
     "axios": "^0.20.0",
     "classnames": "^2.2.6",
     "express": "^4.17.1",

@@ -11,18 +11,19 @@ module.exports = {
   mode: 'development',
   entry: "./server/server.js",
   output: {
-    path: path.join(__dirname, "build"),
+    path: path.resolve(__dirname, "build"),
     filename: "server.js",
-    libraryTarget:  'commonjs2'
+    libraryTarget:  'commonjs2',
+    // publicPath: '/',
   },
   resolve: {
     extensions: ['*', '.js', '.jsx'],
   },
-  // optimization: {
-  //   splitChunks: {
-  //     chunks: 'all',
-  //   },
-  // },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
   externals: [nodeExternals(), '@loadable/component'],
 
   module: {

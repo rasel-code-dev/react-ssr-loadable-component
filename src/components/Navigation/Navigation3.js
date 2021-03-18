@@ -40,7 +40,7 @@ const Navigation3 = () => {
     <header className={["navigation", isExpandNav ? "mobile_navigation" : "desktop_navigation" ].join(" ")}>
       <div className="nav">       
       { render_MainNav(true,  "desktop_nav ", false) }         
-        <IconButton/>
+       
         <div onClick={hangleToggleNavbar} className="toggle_bar">
           <span/>
           <span/>

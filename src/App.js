@@ -7,8 +7,9 @@ import { fetchCurrentUser } from './store/actions/authAction'
 import Navigation3 from './components/Navigation/Navigation3'
 import "./style.scss";
 
-import '@fortawesome/fontawesome-free/css/all.css'
+import IconButton from './components/Button/IconButton'
 
+import { Container } from './components/Layout'
 
 import routes from './routes.js'
 
@@ -17,9 +18,9 @@ const App = ()=>{
   
     return(
       <div className="App">
-        <i class="fa fa-address-book" aria-hidden="true"></i>
 
       <Navigation3/>
+
 
       {/* <DummyNav/> */}
   
@@ -27,19 +28,20 @@ const App = ()=>{
         {routes.map((route, i)=> <Route key={i} {...route} /> )}
       </Switch>
       
+      <Container fluid>
+
+        <IconButton size={16} color="red" type="far fa-heart" />
+        <IconButton size={16} color="#602cbd" type="far fa-bell" />
+
+      </Container>
+
+
       </div>
     )
 }
 
 
-const DummyNav = ()=>{
-  return <ul>
-    <NavLink to="/">Home</NavLink>
-    <NavLink to="/users">Users</NavLink>
-    <NavLink to="/products">Products</NavLink>
-    <NavLink to="/about">About</NavLink>
-  </ul>
-}
+
 
 
 export default App

@@ -9,14 +9,12 @@ module.exports = {
   mode: 'development',
   entry: "./src/Client.js",
   output: {
-    path: path.join(__dirname, "build"),
-    pathinfo: true,
-    // path: path.join(__dirname, "build"),
+    path: path.resolve(__dirname, "build"),
+    publicPath: '/',
     filename: "static/js/[name].bundle.js",
     chunkFilename: 'static/js/[name].chunk.js',
     hotUpdateChunkFilename: 'static/[id].[hash].hot-update.js',
     hotUpdateMainFilename: 'static/[hash].hot-update.json',
-    // publicPath: 'https://cdn.example.com/assets/[hash]/'
   },
   resolve: {
     extensions: ['*', '.js', '.jsx'],

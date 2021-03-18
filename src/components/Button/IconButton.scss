@@ -1,0 +1,16 @@
+.icon_button_wrapper {
+  padding: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  &:hover {
+    background: rgb(255 178 178 / 20%);
+  }
+}
+
+
+
+.text_red {
+  color: red;
+}

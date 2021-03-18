@@ -6,7 +6,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import reduxThunk from "redux-thunk";
 import { Provider } from "react-redux";
 
-// import '@fontawesome-pro-5.12.0-web/css/all.css'
+import "./asserts/@fontawesome-pro-5.12.0-web/css/all.css"
 
 import { loadableReady } from '@loadable/component'
 
@@ -32,7 +32,6 @@ loadableReady(() => {
     <Provider store={store}>
       <BrowserRouter>
         <App/>
-        <i class="fa fa-address-book" aria-hidden="true"></i>
       </BrowserRouter>
     </Provider>,
     document.querySelector("#root")
