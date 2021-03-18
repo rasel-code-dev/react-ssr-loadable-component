@@ -3,7 +3,6 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import './Navigation3.scss'
 
-import IconButton from '../Button/IconButton'
 
 
 const Navigation3 = () => {

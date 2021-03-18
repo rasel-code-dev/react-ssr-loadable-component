@@ -14,35 +14,34 @@ app.use(express.json())
 
 
 // only for development server............
-import devServer from './devServer'
-devServer(app)
+
 
 app.get("/api/users", (req, res)=>{
-  res.send([{username: 'A'}, {username: 'B'}, { username: 'C', username: 'D', username: 'E' }])
+  res.send([{username: 'A'}, {username: 'B'}])
 })
 
 //! Helper for Server side rendering
-import createStore from './helper/createStore'
+
 import renderer from './helper/renderer'
 
-app.get("*", (req, res) => {  
+app.get("*", (req, res) => {
 
-  const store = createStore(req)
-     
+  const store = {}
+  
   //. better way for preload all data from any component or pages
   
   function loadData(callback){
     routes.map(route=>{
       const match = matchPath(req.url, route)
-      if(match){         
+      if(match){
         route.component.load().then(data=>{
           if(data.default.getInitialData){
 
             // call getInitialData function which pass from compoent
-            const getInitialDataObject = data.default.getInitialData(store)  
+            const getInitialDataObject = data.default.getInitialData(store)
 
             // validate if getInitialData return a object
-            if(typeof getInitialDataObject === "object"){ 
+            if(typeof getInitialDataObject === "object"){
               let promises = []
               let props = null
 
@@ -50,7 +49,7 @@ app.get("*", (req, res) => {
               for (const key in getInitialDataObject) {
                 if(getInitialDataObject[key]){
 
-                  // function are redux action 
+                  // function are redux action
                   if(typeof getInitialDataObject[key] === "function"){
                     let actionPromise = getInitialDataObject[key]()
                     promises.push(actionPromise)
@@ -58,7 +57,7 @@ app.get("*", (req, res) => {
                     // props for each component local state
                   } else if (typeof getInitialDataObject[key] === "object") {
                     if(key === "props"){
-                      props = getInitialDataObject[key] 
+                      props = getInitialDataObject[key]
                     }
                   }
                 }
@@ -83,7 +82,7 @@ app.get("*", (req, res) => {
       }
     })
   }
-   
+  
   
   loadData((promises, props) => {
     if (promises === null) {
@@ -109,4 +108,3 @@ app.listen(4000, () =>
   console.log(`server a is running http://localhost:4000`)
 );
 
-      

@@ -2,35 +2,71 @@ const path = require("path");
 const nodeExternals = require("webpack-node-externals")
 const LoadablePlugin = require('@loadable/webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+
+
+let isDevelopment = true
+if(process.env.NODE_ENV){
+  isDevelopment = false
+  console.log("--------- Application bundling for production ------------")
+} else {
+  console.log("start development server.....")
+}
+
+
+const optimization = {
+  moduleIds: 'deterministic',
+  runtimeChunk: 'single',
+  splitChunks: {
+    cacheGroups: {
+      vendor: {
+        test: /[\\/]node_modules[\\/]/,
+        name: 'vendors',
+        chunks: 'all',
+      },
+    },
+  },
+}
+
+let commonRules = [
+  {
+    test: /\.(css|sass|scss)$/,
+    use: [
+      {
+        loader: MiniCssExtractPlugin.loader,
+      },
+      "css-loader",
+      "sass-loader"
+    ]
+  },
+  // {
+  //   test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+  //   loader: require.resolve("url-loader"),
+  //   options: {
+  //     limit: 10000,
+  //     name: "static/media/[name].[hash:8].[ext]"
+  //   }
+  // },
+  {
+    test: /\.(svg||woff2||woff||less||ttf||eot)$/,
+    loader: "file-loader",
+    options: {
+      name: "static/fonts/[name].[hash:8].[ext]"
+    }
+  }
+]
+
 
 const clientConfig = {
   target: "web",
-  devtool:'cheap-module-source-map',
+  mode: isDevelopment ? "development": "production",
   name: "web",
-  mode: "development",
-  entry: "./src/index.js",
+  entry: "./src/main.js",
   output: {
     path: path.resolve(__dirname, "build"),
     publicPath: "/",
-    filename: "static/js/[name].bundle.js",
-    chunkFilename: "static/js/[name].chunk.js",
-    hotUpdateChunkFilename: "static/[id].[hash].hot-update.js",
-    hotUpdateMainFilename: "static/[hash].hot-update.json"
-  },
-  devServer: {
-    port: 3000,
-    historyApiFallback: true,
-    contentBase: "/build",
-    watchContentBase: true
-  },
-  resolve: {
-    extensions: ["*", ".js", ".jsx"]
-  },
-  optimization: {
-    splitChunks: {
-      chunks: "all"
-    }
+    filename: isDevelopment ? "static/js/[name].bundle.js" :  'static/js/[name].[contenthash].js',
+    chunkFilename: "static/js/[name].chunk.js"
   },
 
   module: {
@@ -42,43 +78,13 @@ const clientConfig = {
         options: {
           presets: ["@babel/preset-env", "@babel/preset-react"],
           plugins: [
-            "@babel/plugin-proposal-class-properties",
             "@babel/plugin-transform-runtime",
-            "@babel/plugin-transform-spread",
             '@loadable/babel-plugin'
           ],
           cacheDirectory: true
         }
       },
-      {
-        test: /\.(css|sass|scss)$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: true
-              // reloadAll: true
-            }
-          },
-          "css-loader",
-          "sass-loader"
-        ]
-      },
-      {
-        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-        loader: require.resolve("url-loader"),
-        options: {
-          limit: 10000,
-          name: "static/media/[name].[hash:8].[ext]"
-        }
-      },
-      {
-        test: /\.(svg||woff2||woff||less||ttf||eot)$/,
-        loader: "file-loader",
-        options: {
-          name: "static/fonts/[name].[hash:8].[ext]"
-        }
-      }
+      ...commonRules,
     ]
   },
 
@@ -87,24 +93,19 @@ const clientConfig = {
     new MiniCssExtractPlugin({
       filename: "static/css/[name].css",
       chunkFilename: "static/css/[name].chunk.[id].css"
-    }),
-    // new HtmlWebpackPlugin({
-    //   filename: "index.html",
-    //   template: "public/index.html"
-    // })
+    })
   ]
 };
 
 const serverConfig = {
   name: 'node',
-  devtool:'cheap-module-source-map',
-  mode: "development",
-  entry: "./server/server.js",
   target: "node",
+  mode: isDevelopment ? "development": "production",
+  entry: "./server/main.js",
   output: {
     path: path.resolve(__dirname, "build"),
     publicPath: "/",
-    filename: "node/server.js",
+    filename: "node/[name].js",
     libraryTarget:  'commonjs2',
   },
   resolve: {
@@ -130,43 +131,13 @@ const serverConfig = {
             ],  
           ],
           plugins: [
-            "@babel/plugin-proposal-class-properties",
             "@babel/plugin-transform-runtime",
-            "@babel/plugin-transform-spread",
             '@loadable/babel-plugin'
           ],
           cacheDirectory: true
         }
       },
-      {
-        test: /\.(css|sass|scss)$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: true
-              // reloadAll: true
-            }
-          },
-          "css-loader",
-          "sass-loader"
-        ]
-      },
-      {
-        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-        loader: require.resolve("url-loader"),
-        options: {
-          limit: 10000,
-          name: "static/media/[name].[hash:8].[ext]"
-        }
-      },
-      {
-        test: /\.(svg||woff2||woff||less||ttf||eot)$/,
-        loader: "file-loader",
-        options: {
-          name: "static/fonts/[name].[hash:8].[ext]"
-        }
-      }
+      ...commonRules,
     ]
   },
 
@@ -177,6 +148,23 @@ const serverConfig = {
     })
   ]
 };
+
+
+const resolve = {
+  extensions: ["*", ".js", ".jsx"]
+}
+
+
+if(!isDevelopment){
+  clientConfig.optimization = optimization
+  clientConfig.optimization.minimize = true
+} else {
+  clientConfig.devtool = 'cheap-module-source-map'
+  serverConfig.devtool = 'cheap-module-source-map'
+}
+clientConfig.resolve = resolve
+serverConfig.resolve = resolve
+
 
 
 module.exports = [ clientConfig,  serverConfig  ]

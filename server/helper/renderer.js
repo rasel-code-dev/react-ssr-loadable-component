@@ -4,7 +4,7 @@ import React from 'react'
 import { ChunkExtractor } from '@loadable/server'
 import { StaticRouter } from 'react-router-dom'
 import { renderToString } from 'react-dom/server'
-import { Provider } from 'react-redux'
+
 import { Helmet } from 'react-helmet'
 import App from '../../src/App'
 
@@ -17,11 +17,11 @@ const webExtractor = new ChunkExtractor({ statsFile: webStats })
 export default (req, store, props)=>{
 
   const jsx = webExtractor.collectChunks(
-    <Provider store={store}>
+    
       <StaticRouter location={req.url} context={{}} >
         <App componentProps={{ props: props, page: req.url }} />
       </StaticRouter>
-    </Provider>
+  
   )
   const content = renderToString(jsx)
   const helmet = Helmet.renderStatic()
@@ -48,9 +48,8 @@ export default (req, store, props)=>{
       ${webExtractor.getScriptTags()}
       <script id="APP_DATA" type="application/json">${JSON.stringify({ props: props, page: req.url })}</script>
       <script>
-        window.INITIAL_STATE = ${JSON.stringify(store.getState())}
+        window.INITIAL_STATE = ${JSON.stringify(store)}
       </script>
-      <script src="//localhost:35729/livereload.js?snipver=1" async="" defer=""></script>
     </body>
   </html>
 ` 
