@@ -36,18 +36,14 @@ const UsersPage = (props) => {
 
 
 UsersPage.getInitialData = (store)=>{  
-
   // return store.dispatch(fetchUsers())  // you can one or multiple action here...... 
-
   return {
       A: ()=> store.dispatch(fetchUsers()),
-    // B: ()=> store.dispatch(fetchUserPosts())
+    // AA: ()=> store.dispatch(fetchUsers())
   }
 }
 
-function mapStateToProps(state){
-  console.log(state);
-  
+function mapStateToProps(state){  
   return { users: state.users }
 }
 

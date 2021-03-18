@@ -2,7 +2,6 @@
   "name": "react",
   "version": "1.0.0",
   "license": "MIT",
-  "main": "babel.config.js",
   "scripts": {
     "dev": "webpack -w",
     "server:run": "nodemon --watch build --exec \"node build/node/server.js \" ",
@@ -11,7 +10,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
-    "@babel/node": "^7.10.5",
     "@babel/plugin-transform-runtime": "^7.11.5",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
@@ -23,7 +21,6 @@
     "livereload": "^0.9.1",
     "babel": "^6.23.0",
     "babel-loader": "^8.1.0",
-    "core-js": "^3.6.5",
     "css-loader": "^4.3.0",
     "file-loader": "^6.1.0",
     "html-webpack-plugin": "^4.5.0",

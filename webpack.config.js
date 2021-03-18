@@ -1,8 +1,8 @@
-import path from "path";
-import nodeExternals from "webpack-node-externals";
-import LoadablePlugin from '@loadable/webpack-plugin'
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import HtmlWebpackPlugin from "html-webpack-plugin";
+const path = require("path");
+const nodeExternals = require("webpack-node-externals")
+const LoadablePlugin = require('@loadable/webpack-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const clientConfig = {
   target: "web",
@@ -177,4 +177,4 @@ const serverConfig = {
 };
 
 
-module.exports = [ serverConfig, clientConfig ]
+module.exports = [ clientConfig,  serverConfig  ]
