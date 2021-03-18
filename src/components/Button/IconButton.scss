@@ -1,11 +1,11 @@
 .icon_button_wrapper {
-  padding: 5px;
+  // padding: 5px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   &:hover {
-    background: rgb(255 178 178 / 20%);
+    background:#fd8a8a
   }
 }
 
@@ -13,4 +13,17 @@
 
 .text_red {
   color: red;
+}
+
+.MuiSvgIcon-root{
+  width: 20px;
+}
+
+.circle_icon{
+  // font-size: 16px;
+  // color: #602cbd;
+  // width: 20px;
+  // height: 20px;
+  // text-align: center;
+  // line-height: 20px
 }

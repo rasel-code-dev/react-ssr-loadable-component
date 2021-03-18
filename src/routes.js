@@ -1,25 +1,24 @@
 import React from 'react'
 import loadable from '@loadable/component'
-import ProgressBar from 'react-topbar-progress-indicator'
-
+import Progress from './utils/Progress'
 
 const HomePage = loadable( ()=> import("./pages/HomePage"), {
   ssr: true,
-  fallback: <ProgressBar/>,
+  fallback: <Progress/>,
 })
 
 const UsersPage = loadable( ()=> import("./pages/UsersPage"), {
   ssr: true,
-  fallback: <ProgressBar/>,
+  fallback: <Progress/>,
 })
 
 const AboutPage = loadable( ()=> import("./pages/AboutPage"), {
   ssr: true,
-  fallback: <ProgressBar/>
+  fallback: <Progress/>
 })
 const ProductPage = loadable( ()=> import("./pages/ProductPage"), {
   ssr: true,
-  fallback: <ProgressBar/>
+  fallback: <Progress/>
 })
 
 const routes = [
