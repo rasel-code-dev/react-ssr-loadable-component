@@ -8,18 +8,34 @@ const HomePage = loadable( ()=> import("./pages/HomePage"), {
   fallback: <ProgressBar/>,
 })
 
+const UsersPage = loadable( ()=> import("./pages/UsersPage"), {
+  ssr: true,
+  fallback: <ProgressBar/>,
+})
+
 const AboutPage = loadable( ()=> import("./pages/AboutPage"), {
+  ssr: true,
+  fallback: <ProgressBar/>
+})
+const ProductPage = loadable( ()=> import("./pages/ProductPage"), {
   ssr: true,
   fallback: <ProgressBar/>
 })
 
 const routes = [
-  {  path: '/',
+  {  
+    path: '/',
     component: HomePage,
     exact: true
   },
-  {  path: '/about-page',
+  {  path: '/about',
     component: AboutPage,
+  },
+  {  path: '/products',
+    component: ProductPage,
+  },
+  {  path: '/users',
+    component: UsersPage,
   }
 ]
 

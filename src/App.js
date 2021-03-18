@@ -1,29 +1,45 @@
 import React from 'react'
-// eslint-disable-next-line import/no-extraneous-dependencies
+import { Switch, Route, NavLink } from 'react-router-dom'
 
-import { Route, Switch, NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { fetchCurrentUser } from './store/actions/authAction'
 
-import routes from './routes'
+import Navigation3 from './components/Navigation/Navigation3'
+import "./style.scss";
 
-const Navigation = ()=>{
-  return (
-    <header>
-    <li> <NavLink to="/">Home</NavLink> </li>
-    <li> <NavLink to="/about-page">About Page</NavLink> </li>
-    </header>
-  )
+import '@fortawesome/fontawesome-free/css/all.css'
+
+
+import routes from './routes.js'
+
+
+const App = ()=>{
+  
+    return(
+      <div className="App">
+        <i class="fa fa-address-book" aria-hidden="true"></i>
+
+      <Navigation3/>
+
+      {/* <DummyNav/> */}
+  
+      <Switch>
+        {routes.map((route, i)=> <Route key={i} {...route} /> )}
+      </Switch>
+      
+      </div>
+    )
 }
 
-const App = () => (
-  <div>
-    <Navigation/>
-    <br/>
-    <i className="fa fa-address-book" aria-hidden="true"></i>
 
-    <Switch>
-      { routes.map((route, i)=> <Route key={i} {...route} /> ) }
-    </Switch>
-  </div>
-)
+const DummyNav = ()=>{
+  return <ul>
+    <NavLink to="/">Home</NavLink>
+    <NavLink to="/users">Users</NavLink>
+    <NavLink to="/products">Products</NavLink>
+    <NavLink to="/about">About</NavLink>
+  </ul>
+}
+
 
 export default App
