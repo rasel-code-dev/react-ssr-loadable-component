@@ -1,0 +1,77 @@
+.gallery_wrapper {
+  user-select: none;
+  .preview_image_div {
+    position: relative;
+    width: 100%;
+    img {
+      width: 100%;
+    }
+    .prevGalleryImage,
+    .nextGalleryImage{
+      position: absolute;
+      background: rgb(235, 235, 235);
+      text-align: center;
+      color: #272727;
+      top: 50%;
+      margin: -30px;
+      cursor: pointer;
+  
+      width: 37px;
+      padding: 2px;
+    }
+    .prevGalleryImage{
+      left: 0;
+    }
+    .nextGalleryImage{
+      right: 0;
+  
+    }
+    .delete_photo{
+      position: absolute;
+      right: -20px;
+      color: red;
+
+      z-index: 27;
+    }
+  }
+
+  .gallery {
+    display: flex;
+    width: 100%;
+    align-items: center;
+
+    .image_item {
+      width: 100px;
+
+      img {
+        width: 100%;
+        display: flex;
+      }
+    }
+  }
+}
+
+.error_image{
+  background: rgb(80, 80, 80);
+  width: 100%;
+  height: 200px;
+  position: relative;
+  &::after {
+    content: "Not Supported Image";
+    text-align: center;
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translate(-60px, -30px);
+    left: 50%;
+    color: aliceblue;
+      font-weight: 600;
+  }
+}
+
+.active_image_gallery{
+  // box-shadow: 0 0 5px 2px #757575;
+  padding: 0;
+  width: 150px !important;
+
+}

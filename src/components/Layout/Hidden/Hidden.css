@@ -1,0 +1,151 @@
+/* 
+ 0   -> 575   ----> xs
+ 576 -> 767   ----> sm 
+ 768 -> 991   ----> md 
+ 992 -> 1199  ----> lg 
+ 1200 -> to up ----> xl 
+*/
+
+/* 
+  meterial ui breakpoint 
+  xs start 0    -- 599 
+  sm start 600  -- 959 
+  md start 960  -- 1279 
+  lg start 1280 -- 1919 
+  xl start 1920 -- up 
+*/
+
+
+
+
+@media (max-width: 576px) {
+  .d-xs-none {
+    display: none !important;
+  }
+  .d-xs-block {
+    display: block !important;
+  }
+}
+
+@media (min-width: 576px) {
+  .d-sm-none {
+    display: none !important;
+  }
+  .d-sm-block {
+    display: block !important;
+  }
+
+}
+
+@media (min-width: 768px) {
+  .d-md-none {
+    display: none !important;
+  }
+
+  .d-md-block {
+    display: block !important;
+  }
+
+}
+
+@media (min-width: 992px) {
+  .d-lg-none {
+    display: none !important;
+  }
+
+  .d-lg-block {
+    display: block !important;
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .d-xl-none {
+    display: none !important;
+  }
+
+  .d-xl-block {
+    display: block !important;
+  }
+
+}
+
+
+/* hide down */
+@media (max-width: 575px) {
+  .hideDown_sm{
+    display: none
+  }
+}
+@media (max-width: 767px) {
+  .hideDown_md{
+    display: none
+  }
+}
+@media (max-width: 991px) {
+  .hideDown_lg{
+    display: none
+  }
+}
+@media (max-width: 1199px) {
+  .hideDown_xl{
+    display: none
+  }
+}
+
+/* hide up */
+@media (min-width: 768px) {
+  .hideUp_sm{
+    display: none
+  }
+}
+@media (min-width: 992px) {
+  .hideUp_md{
+    display: none
+  }
+}
+@media (min-width: 1199px) {
+  .hideUp_lg{
+    display: none
+  }
+}
+@media (min-width: 1366px) {
+  .hideUp_xl{
+    display: none
+  }
+}
+
+
+
+/* ...........css privateCss-hidden class........... */
+@media (max-width: 1200px){
+  .privateCss-hidden-only-xl {
+    display: none;
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 993px) {
+  .privateCss-hidden-only-lg {
+    display: none;
+  }
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+  .privateCss-hidden-only-md {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) and (min-width: 576px) {
+  .privateCss-hidden-only-sm {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) and (min-width: 0px) {
+  .privateCss-hidden-only-xs {
+    display: none;
+  }
+}
+
+

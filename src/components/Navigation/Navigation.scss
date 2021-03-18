@@ -1,0 +1,37 @@
+
+
+header{
+    background: #602cbd;
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+  .main_nav{
+    padding: 0 30px;
+    min-height: 25px;
+    display: flex;
+    align-items: center;
+    li{
+      list-style: none;
+      padding: 0 10px;
+      cursor: pointer;
+      a{
+        text-decoration: none;
+        color: #e2e2e2;
+        font-family: roboto;
+        font-size: 15px;
+        &.active{
+          color: rgb(255, 0, 0);
+          font-weight: 500;
+        }
+      }
+      &:hover{
+        a{
+          color: rgb(255, 0, 0);
+          font-weight: 500;
+        }
+      }      
+    }
+  }
+}
+
