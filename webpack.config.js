@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const clientConfig = {
   target: "web",
+  devtool:'cheap-module-source-map',
   name: "web",
   mode: "development",
   entry: "./src/index.js",
@@ -96,6 +97,7 @@ const clientConfig = {
 
 const serverConfig = {
   name: 'node',
+  devtool:'cheap-module-source-map',
   mode: "development",
   entry: "./server/server.js",
   target: "node",

@@ -10,12 +10,11 @@ const UsersPage = (props) => {
 
   const [state, setState] = React.useState({ isLoading:false })
 
-  const { users } = props
+  const { users, users2 } = props
 
   function fetchUsers(){
     setState({ isLoading: true })
   }
-
 
   return (
     <div>
@@ -27,7 +26,12 @@ const UsersPage = (props) => {
       {state.isLoading && <Progress/>}
 
       <button onClick={fetchUsers}>getUser</button>
+
+      <br/>
+      <span>Redux Data</span>
+      <ul>{users2 && users2.map((user, i)=> <li key={i} >{user.username}</li>)} </ul>
       
+      <span>Props Data</span>
       <ul>{users && users.map((user, i)=> <li key={i} >{user.username}</li>)} </ul>
 
     </div>
@@ -36,15 +40,22 @@ const UsersPage = (props) => {
 
 
 UsersPage.getInitialData = (store)=>{  
-  // return store.dispatch(fetchUsers())  // you can one or multiple action here...... 
+  // return store.dispatch(fetchUsers())  
   return {
-      A: ()=> store.dispatch(fetchUsers()),
-    // AA: ()=> store.dispatch(fetchUsers())
+    function(){
+      return store.dispatch(fetchUsers())
+    },
+    props: { 
+      users: [
+        { username: "rasel"},
+        { username: "raju"},
+      ] 
+    }
   }
 }
 
 function mapStateToProps(state){  
-  return { users: state.users }
+  return { users2: state.users }
 }
 
 export default connect(mapStateToProps, { fetchUsers })(UsersPage)

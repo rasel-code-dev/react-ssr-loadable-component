@@ -14,12 +14,12 @@ const webStats = path.resolve('./build/static/loadable-stats.json')
 const webExtractor = new ChunkExtractor({ statsFile: webStats })
  
 
-export default (req, store)=>{
+export default (req, store, props)=>{
 
   const jsx = webExtractor.collectChunks(
     <Provider store={store}>
       <StaticRouter location={req.url} context={{}} >
-        <App/>
+        <App componentProps={{ props: props, page: req.url }} />
       </StaticRouter>
     </Provider>
   )
@@ -38,6 +38,7 @@ export default (req, store)=>{
       ${webExtractor.getLinkTags()}
       ${webExtractor.getStyleTags()}
       <link rel="shortcut icon" type="image/jpg" href="/public/favicon.ico"/>
+      <link rel="stylesheet" href="http://localhost:1000/static/fonts/roboto.css" />
     </head>
     <body>
       <div id="backdrop"></div>
@@ -45,6 +46,7 @@ export default (req, store)=>{
       <div id="root">${content}</div>
      
       ${webExtractor.getScriptTags()}
+      <script id="APP_DATA" type="application/json">${JSON.stringify({ props: props, page: req.url })}</script>
       <script>
         window.INITIAL_STATE = ${JSON.stringify(store.getState())}
       </script>

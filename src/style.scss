@@ -15,3 +15,33 @@ h1{
   color: rgb(24, 9, 240);
   font: normal 600 33px roboto
 }
+
+
+@mixin reset{
+  margin: 0;
+  padding: 0;
+}
+
+.product-wrapper{
+  display: flex;
+  flex-wrap: wrap;;
+  .product{
+    width: 200px;
+    margin: 10px;
+    padding: 10px;
+    img{
+      width: 100%;
+    }
+    .product-name{
+      font-family: Roboto;
+      font-size: 20px;
+      @include reset
+    }
+    .product-price{
+      @include reset
+    }
+    .product-qty{
+      @include reset
+    }
+  }
+}
