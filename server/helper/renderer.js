@@ -7,6 +7,7 @@ import { renderToString } from 'react-dom/server'
 
 import { Helmet } from 'react-helmet'
 import App from '../../src/App'
+import {Provider} from "react-redux";
 
 
 
@@ -17,10 +18,11 @@ const webExtractor = new ChunkExtractor({ statsFile: webStats })
 export default (req, store, props)=>{
 
   const jsx = webExtractor.collectChunks(
-    
-      <StaticRouter location={req.url} context={{}} >
-        <App componentProps={{ props: props, page: req.url }} />
-      </StaticRouter>
+        <Provider store={store}>
+              <StaticRouter location={req.url} context={{}} >
+                <App componentProps={{ props: props, page: req.url }} />
+              </StaticRouter>
+        </Provider>
   
   )
   const content = renderToString(jsx)
@@ -48,7 +50,7 @@ export default (req, store, props)=>{
       ${webExtractor.getScriptTags()}
       <script id="APP_DATA" type="application/json">${JSON.stringify({ props: props, page: req.url })}</script>
       <script>
-        window.INITIAL_STATE = ${JSON.stringify(store)}
+        window.INITIAL_STATE = ${JSON.stringify(store.getState())}
       </script>
     </body>
   </html>

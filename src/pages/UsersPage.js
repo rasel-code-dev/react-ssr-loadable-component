@@ -1,16 +1,17 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 
-import Progress from '../utils/Progress'
+import {fetchUsers} from "../store";
+import {connect} from "react-redux";
+import axios from "axios";
 
 
 const UsersPage = (props) => {
 
   const [state, setState] = React.useState({ isLoading:false })
-
-  const { users, users2 } = props
-
   
+  
+  const { users, users2 } = props
 
   return (
     <div>
@@ -31,23 +32,44 @@ const UsersPage = (props) => {
 }
 
 
-UsersPage.getInitialData = (store)=>{  
-  // return store.dispatch(fetchUsers())  
+UsersPage.getInitialProps = ()=> {
+  
+  /** Send Plain Object as props after promise resolve */
+  // let { data } = await axios.get("http://localhost:4000/api/users")
+  // return  {
+  //   props: { users: data, cart: [12, 86, 9] },
+  // }
+  //
+  
+  /** Send promise as props */
+  // return axios.get("http://localhost:4000/api/users").then(r => {
+  //   return {
+  //     props: {
+  //       users: r.data,
+  //       cart: [12, 86, 9]
+  //     }
+  //   }
+  // })
+  //
+  
+  /** Send Plain Object as props */
   return {
-    function(){
-      // return store.dispatch(fetchUsers())
-    },
-    props: { 
+    props: {
       users: [
         { username: "rasel"},
         { username: "raju"},
-      ] 
+      ]
     }
   }
 }
 
-function mapStateToProps(state){  
+UsersPage.getInitialData = (store)=> {
+  return store.dispatch(fetchUsers())
+}
+
+
+function mapStateToProps(state){
   return { users2: state.users }
 }
 
-export default UsersPage
+export default connect(mapStateToProps, {fetchUsers })(UsersPage)

@@ -1,4 +1,3 @@
-// import "core-js";
 import React from "react";
 import { hydrate } from "react-dom";
 import { BrowserRouter } from "react-router-dom";
@@ -8,8 +7,26 @@ import { loadableReady } from "@loadable/component";
 ;
 import App from "./App";
 
-import '../public/@fontawesome-pro-5.12.0-web/css/all.css'
+import {Provider} from "react-redux";
+import {productReducer} from "./store";
+import {applyMiddleware, compose, createStore} from "redux";
+import thunk from "redux-thunk";
+import axios from "axios";
 
+const axiosInstance = axios.create({
+  baseURL: "/"
+});
+
+
+
+const composeEnhanchers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const store = createStore(
+  productReducer,
+  window.INITIAL_STATE,
+  composeEnhanchers(
+    applyMiddleware(thunk.withExtraArgument(axiosInstance))
+  )
+);
 
 loadableReady(() => { 
   let g = {}
@@ -17,12 +34,16 @@ loadableReady(() => {
   if (APP_DATA && APP_DATA.innerText && APP_DATA.innerText !== "undefined") {
     g = JSON.parse(APP_DATA.innerText)
   }
+  
 
   hydrate(
-    // <Provider store={store}>
+    <
+      Provider store={store}>
       <BrowserRouter>
         <App componentProps={g} />
-      </BrowserRouter>,
+      </BrowserRouter>
+    </Provider>
+      ,
     document.getElementById("root"), 
     ()=>removeScript(APP_DATA)
   );
