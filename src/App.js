@@ -52,7 +52,7 @@ const App = (props)=>{
     } else{
       setRoute(route)
       // data fetch handle from client side
-      if(props.componentProps.props && route.path == props.componentProps.page){  
+      if(props.componentProps.props && route.path === props.componentProps.page){
         return route.component.render({...oldProps, ...props.componentProps.props}) 
       
       } else{
@@ -78,15 +78,6 @@ const App = (props)=>{
         )}
       </Switch>
       
-      <Container fluid>
-
-        <IconButton size={20} color="red" type="far fa-heart" />
-        <IconButton color="#602cbd" type="far fa-bell" />
-        <IconButton svg>{clock}</IconButton>
-        <IconButton svg>{bell}</IconButton>
-      </Container>
-
-
       </div>
     )
 }

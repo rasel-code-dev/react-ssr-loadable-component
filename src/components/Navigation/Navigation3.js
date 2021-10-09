@@ -28,7 +28,7 @@ const Navigation3 = () => {
        <ul className={["main_nav", status, serverRendering && ssr ? "ssr_mode" : "", 
           isMobile ? (isExpandNav === true ? "expand_mobile_nav" : "" ) : "", 
           isMobile ? (isExpandNav === false ? "collapse_mobile_nav" : "") : "" ].join(" ")}>
-        <li onClick={closeNavbar} className="nav_item"><NavLink exact to="/">Home</NavLink></li>
+        <li onClick={closeNavbar} className="nav_item"><NavLink exact to="/">Home A</NavLink></li>
         <li onClick={closeNavbar}  className="nav_item"> <NavLink to="/users">Users</NavLink></li>
         <li onClick={closeNavbar}  className="nav_item"><NavLink to="/products">Products</NavLink></li>
         <li onClick={closeNavbar}  className="nav_item"><NavLink to="/about">About</NavLink></li>     

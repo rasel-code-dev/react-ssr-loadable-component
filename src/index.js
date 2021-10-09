@@ -30,7 +30,7 @@ export const store = createStore(
   )
 );
 
-import '../public/@fontawesome-pro-5.12.0-web/css/all.css'
+// import '../public/@fontawesome-pro-5.12.0-web/css/all.css'
 
 
 loadableReady(() => { 

@@ -50,7 +50,7 @@ export default (req, store, props)=>{
       <script>
         window.INITIAL_STATE = ${JSON.stringify(store.getState())}
       </script>
-      <script src="//localhost:35729/livereload.js?snipver=1" async="" defer=""></script>
+<!--      <script src="//localhost:35729/livereload.js?snipver=1" async="" defer=""></script>-->
     </body>
   </html>
 ` 

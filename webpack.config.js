@@ -55,10 +55,10 @@ const clientConfig = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: true
-              // reloadAll: true
-            }
+            // options: {
+            //   hmr: true
+            //   // reloadAll: true
+            // }
           },
           "css-loader",
           "sass-loader"
@@ -143,10 +143,10 @@ const serverConfig = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: true
-              // reloadAll: true
-            }
+            // options: {
+            //   hmr: true
+            //   // reloadAll: true
+            // }
           },
           "css-loader",
           "sass-loader"

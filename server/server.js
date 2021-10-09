@@ -14,8 +14,8 @@ app.use(express.json())
 
 
 // only for development server............
-import devServer from './devServer'
-devServer(app)
+// import devServer from './devServer'
+// devServer(app)
 
 app.get("/api/users", (req, res)=>{
   res.send([{username: 'A'}, {username: 'B'}, { username: 'C', username: 'D', username: 'E' }])
